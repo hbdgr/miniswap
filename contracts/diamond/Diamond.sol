@@ -10,21 +10,59 @@ pragma solidity =0.8.24;
 
 import { LibDiamond } from "./libraries/LibDiamond.sol";
 import { IDiamondCut } from "./interfaces/IDiamondCut.sol";
+import { IDiamondLoupe } from "./interfaces/IDiamondLoupe.sol";
+import { IERC165 } from "./interfaces/IERC165.sol";
+
+import { IERC20Swapper } from "../swapper/interfaces/IERC20Swapper.sol";
+import { LibSwapperStorage } from "../swapper/libraries/LibSwapperStorage.sol";
 
 contract Diamond {
-
-    constructor(address _contractOwner, address _diamondCutFacet) payable {
+    constructor(
+        address _contractOwner,
+        address _diamondCutFacet,
+        address _diamondLoupeFacet,
+        address _erc20Swapper,
+        address _uniswapV2Router
+    ) payable {
         LibDiamond.setContractOwner(_contractOwner);
 
         // Add the diamondCut external function from the diamondCutFacet
-        IDiamondCut.FacetCut[] memory cut = new IDiamondCut.FacetCut[](1);
-        bytes4[] memory functionSelectors = new bytes4[](1);
-        functionSelectors[0] = IDiamondCut.diamondCut.selector;
+        IDiamondCut.FacetCut[] memory cut = new IDiamondCut.FacetCut[](3);
+
+        // Diamond Cut Facet
+        bytes4[] memory cutFacetSelectors = new bytes4[](1);
+        cutFacetSelectors[0] = IDiamondCut.diamondCut.selector;
         cut[0] = IDiamondCut.FacetCut({
             facetAddress: _diamondCutFacet,
             action: IDiamondCut.FacetCutAction.Add,
-            functionSelectors: functionSelectors
+            functionSelectors: cutFacetSelectors
         });
+
+        // Diamond Loupe Facet
+        bytes4[] memory loupeFacetSelectors = new bytes4[](5);
+        loupeFacetSelectors[0] = IDiamondLoupe.facets.selector;
+        loupeFacetSelectors[1] = IDiamondLoupe.facetFunctionSelectors.selector;
+        loupeFacetSelectors[2] = IDiamondLoupe.facetAddresses.selector;
+        loupeFacetSelectors[3] = IDiamondLoupe.facetAddress.selector;
+        loupeFacetSelectors[4] = IERC165.supportsInterface.selector;
+        cut[1] = IDiamondCut.FacetCut({
+            facetAddress: _diamondLoupeFacet,
+            action: IDiamondCut.FacetCutAction.Add,
+            functionSelectors: loupeFacetSelectors
+        });
+
+        // Diamond ERC20Swapper Facet
+        bytes4[] memory erc20Swapper = new bytes4[](1);
+        erc20Swapper[0] = IERC20Swapper.swapEtherToToken.selector;
+        cut[2] = IDiamondCut.FacetCut({
+            facetAddress: _erc20Swapper,
+            action: IDiamondCut.FacetCutAction.Add,
+            functionSelectors: erc20Swapper
+        });
+
+        // Set Uniswap V2 Router
+        LibSwapperStorage.setUniswapV2Router(_uniswapV2Router);
+
         LibDiamond.diamondCut(cut, address(0), "");
     }
 
