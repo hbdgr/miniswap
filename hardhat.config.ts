@@ -10,7 +10,33 @@ const reportSize = process.env.REPORT_SIZE?.toLowerCase() === "true";
 dotenv.config();
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.24",
+  solidity: {
+    compilers: [
+      {
+        version: "0.8.24",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 80,
+          },
+          viaIR: true,
+        },
+      },
+      {
+        version: "0.6.12", // uniswapV2 Router
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 80,
+          },
+        },
+      },
+      {
+        version: "0.5.16", // @uniswap/v2-core
+      },
+    ],
+  },
+
   networks: {
     hardhat: {
       accounts: {
