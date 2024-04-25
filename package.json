@@ -16,6 +16,7 @@
     "@openzeppelin/contracts": "^5.0.2",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
+    "@uniswap/lib": "^4.0.1-alpha",
     "@uniswap/v2-core": "^1.0.1",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
@@ -27,6 +28,7 @@
     "hardhat": "^2.22.3",
     "hardhat-contract-sizer": "^2.10.0",
     "hardhat-gas-reporter": "^1.0.8",
+    "hardhat-ignore-warnings": "^0.2.11",
     "husky": "^9.0.11",
     "solhint": "^4.5.4",
     "solidity-coverage": "^0.8.12"

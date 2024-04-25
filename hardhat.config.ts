@@ -1,6 +1,7 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-contract-sizer";
+import "hardhat-ignore-warnings"; // mainly for external uniswap contracts
 
 import dotenv from "dotenv";
 
@@ -70,6 +71,15 @@ const config: HardhatUserConfig = {
     disambiguatePaths: false,
     runOnCompile: reportSize,
     strict: true,
+  },
+
+  warnings: {
+    "@uniswap/**/*": {
+      license: "off",
+    },
+    "contracts/uniswapV2Router/**/*": {
+      license: "off",
+    },
   },
 };
 
