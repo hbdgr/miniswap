@@ -1,0 +1,32 @@
+{
+  "name": "miniswap",
+  "author": "hbdgr",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "scripts": {
+    "test": "npx hardhat test",
+    "coverage": "npx hardhat coverage --solcoverjs .solcover.ts",
+    "lint": "npx eslint . --ext .js,.ts",
+    "check": "solhint -c .solhint.json 'contracts/**/*.sol'",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "ethers": "^6.12.0",
+    "hardhat": "^2.22.3",
+    "hardhat-contract-sizer": "^2.10.0",
+    "hardhat-gas-reporter": "^1.0.8",
+    "husky": "^9.0.11",
+    "solhint": "^4.5.4",
+    "solidity-coverage": "^0.8.12"
+  }
+}
