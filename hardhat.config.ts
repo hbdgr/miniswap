@@ -1,14 +1,14 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-contract-sizer";
-import "hardhat-ignore-warnings"; // mainly for external uniswap contracts
+import "hardhat-gas-reporter";
+import "hardhat-ignore-warnings"; // mainly for test uniswap contracts
 
 import dotenv from "dotenv";
+dotenv.config();
 
 const reportGas = process.env.REPORT_GAS?.toLowerCase() === "true";
 const reportSize = process.env.REPORT_SIZE?.toLowerCase() === "true";
-
-dotenv.config();
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -56,6 +56,8 @@ const config: HardhatUserConfig = {
       accounts: {
         mnemonic: process.env.WALLET_MNEMONIC,
       },
+
+      initialBaseFeePerGas: 2500000000,
       chainId: 11155111,
     },
   },
