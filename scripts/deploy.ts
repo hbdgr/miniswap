@@ -1,8 +1,11 @@
 import { ethers } from "hardhat";
 import { deployDiamond } from "./deployDiamond";
 
+// UniswapV2 addresses:
+// https://docs.uniswap.org/contracts/v2/reference/smart-contracts/v2-deployments
+
 // address of already deployed UniswapV2 Router
-const uniswapV2RouterAddress = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
+const uniswapV2RouterAddress = "";
 
 async function main() {
   const accounts = await ethers.getSigners();

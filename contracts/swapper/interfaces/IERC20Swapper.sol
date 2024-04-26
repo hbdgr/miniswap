@@ -17,4 +17,7 @@ interface IERC20Swapper {
     /// @param minAmount The minimum amount of tokens transferred to msg.sender
     /// @return The actual amount of transferred tokens
     function swapEtherToToken(address token, uint256 minAmount) external payable returns (uint256);
+
+    /// @return The address of used UniswapV2Router02 contract.
+    function getRouterAddress() external view returns (address);
 }

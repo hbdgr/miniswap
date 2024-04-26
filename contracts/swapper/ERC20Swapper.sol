@@ -13,9 +13,6 @@ import { LibSwapperStorage } from "./libraries/LibSwapperStorage.sol";
  * @title ERC20Swapper
  * A very minimal contract enabling integration with an external decentralized exchange
  * to perform token swaps.
- *
- * UniswapV2 addresses:
- * https://docs.uniswap.org/contracts/v2/reference/smart-contracts/v2-deployments
  */
 contract ERC20Swapper is IERC20Swapper {
     using SafeERC20 for IERC20;
@@ -29,7 +26,10 @@ contract ERC20Swapper is IERC20Swapper {
     function swapEtherToToken(address token, uint256 minAmount) public payable returns (uint256) {
         IUniswapV2Router02 router = IUniswapV2Router02(LibSwapperStorage.router());
 
-        // Use straight path from WETH to token - could not be optimal for low liquid tokens
+        // arbitrary value; if tx is not mined within this deadline, the swap will fail.
+        uint256 deadlineTimeout = block.timestamp + 1 hours;
+
+        // straight path from WETH to token - could not be optimal for low liquid tokens
         address[] memory path = new address[](2);
         path[0] = router.WETH();
         path[1] = token;
@@ -37,8 +37,8 @@ contract ERC20Swapper is IERC20Swapper {
         uint256[] memory amounts = router.swapExactETHForTokens{value: msg.value}(
             minAmount,
             path,
-            address(this),
-            block.timestamp
+            msg.sender, // receiver
+            deadlineTimeout
         );
 
         uint256 amountOut = amounts[amounts.length - 1];
@@ -47,7 +47,7 @@ contract ERC20Swapper is IERC20Swapper {
     }
 
     /**
-     * @return The address used UniswapV2Router02 contract.
+     * @inheritdoc IERC20Swapper
      */
     function getRouterAddress() external view returns (address) {
         return address(LibSwapperStorage.getStorage().router);

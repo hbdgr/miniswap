@@ -52,8 +52,9 @@ contract Diamond {
         });
 
         // Diamond ERC20Swapper Facet
-        bytes4[] memory erc20Swapper = new bytes4[](1);
+        bytes4[] memory erc20Swapper = new bytes4[](2);
         erc20Swapper[0] = IERC20Swapper.swapEtherToToken.selector;
+        erc20Swapper[1] = IERC20Swapper.getRouterAddress.selector;
         cut[2] = IDiamondCut.FacetCut({
             facetAddress: _erc20Swapper,
             action: IDiamondCut.FacetCutAction.Add,
