@@ -31,7 +31,6 @@ describe("ERC20Deposit", function () {
     const UniswapV2Router = await deployTestUniswapV2Router(UniswapV2Factory);
 
     /* const TestERC20toETHPair = */ await createTestETHPair(
-      UniswapV2Factory,
       UniswapV2Router,
       TestERC20,
     );

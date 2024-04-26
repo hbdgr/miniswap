@@ -1,0 +1,49 @@
+signer: 0x22287f88249Fc96f72a49CBC2641EdC5be05EF76
+
+// scripts/deploy.ts
+
+UniswapV2Factory deployed: 0x2011987b0aC8AbbA33fC5E38B8D2640E96174cF7
+WETH deployed: 0x2fA034c9aCE17b44178465A10251d92A369C00E0
+UniswapV2Router02 deployed: 0xF1562b021DBEfFCd4f9ec8C8cAC7B5a5Af4a1bba
+DiamondCutFacet deployed: 0xa2a49A00eE4FDc72b84D4aD8C278ef0279F66677
+DiamondLoupeFacet deployed: 0x3e599986F0f994227Bb0c687D97DC52C2F17E7D8
+ERC20Swapper deployed: 0x3990fAe3d1FC31AD7D79229cA35580e926b1Ab30
+
+Diamond deployed: 0xeB4AbbcC977C6Da2c6a34c199E0bA54245829F42, args: 0x22287f88249Fc96f72a49CBC2641EdC5be05EF76 0xa2a49A00eE4FDc72b84D4aD8C278ef0279F66677 0x3e599986F0f994227Bb0c687D97DC52C2F17E7D8 0x3990fAe3d1FC31AD7D79229cA35580e926b1Ab30 0xF1562b021DBEfFCd4f9ec8C8cAC7B5a5Af4a1bba
+
+// scripts/useSwapper.ts
+
+SwapToken deployed: 0x22ee4360a4747B069c04794Da9f5BfC1f5662113
+Liquidity: ETH/SwapToken pair created: 0xB77bA681AE44f76DDEF2C76cC58aFEa4dfF9760d
+Swap completed tx receipt ContractTransactionReceipt {
+  provider: HardhatEthersProvider {
+    _hardhatProvider: LazyInitializationProviderAdapter {
+      _providerFactory: [AsyncFunction (anonymous)],
+      _emitter: [EventEmitter],
+      _initializingPromise: [Promise],
+      provider: [BackwardsCompatibilityProviderAdapter]
+    },
+    _networkName: 'sepolia',
+    _blockListeners: [],
+    _transactionHashListeners: Map(0) {},
+    _eventListeners: [],
+    _isHardhatNetworkCached: false,
+    _transactionHashPollingInterval: undefined
+  },
+  to: '0xeB4AbbcC977C6Da2c6a34c199E0bA54245829F42',
+  from: '0x22287f88249Fc96f72a49CBC2641EdC5be05EF76',
+  contractAddress: null,
+  hash: '0x383a2c0f5761fe0ea4bd44c8b2dcccfcb950b70a57534066a0381c54865e04d3',
+  index: 50,
+  blockHash: '0x910d54852f9ebd097059c06077957a75df8017fe44daab4514efd7dde0667716',
+  blockNumber: 5782146,
+  logsBloom: '0x00200000000000000000000080000008000000000000000000000400000000000080000000004000000000004000000008000000000000008000000000000000004000000000000000000008000000205000000000000000000000008000000000000000000040080000000000000000000000000002000000000010000000000000000000000000000000000000000000000101000000080000004000000000000000040002000004000000000000000000000028000000000000000000000000000002000000000000000000280000000000000000001040000000000000000000000000000000000000000000020000000000000000400000000000002000',
+  gasUsed: 185150n,
+  blobGasUsed: undefined,
+  cumulativeGasUsed: 12353189n,
+  gasPrice: 1863884567n,
+  blobGasPrice: undefined,
+  type: 2,
+  status: 1,
+  root: undefined
+}

@@ -79,23 +79,26 @@ export function calcMinTokens(amount: bigint): bigint {
 }
 
 export async function createTestETHPair(
-  factory: UniswapV2Factory,
   router: UniswapV2Router02,
   token: IERC20Metadata,
 ): Promise<UniswapV2Pair> {
+  const factoryAddress = await router.factory();
+  const factory = await ethers.getContractAt("UniswapV2Factory", factoryAddress);
+
   const [acc1] = await ethers.getSigners();
 
   const tokenDecimals = await token.decimals();
   const tokenAmount = parseUnits("100", tokenDecimals);
 
-  // make price of eth 10:1 to the token
-  const ethAmount = parseEther("10"); // eth decimals - 18
+  // make price of eth 1000:1 to the token
+  const ethAmount = parseEther("0.1"); // eth decimals - 18
 
   // apply slippage
   const tokenAmountMin = calcMinTokens(tokenAmount);
   const ethAmountMin = calcMinTokens(ethAmount);
 
   await token.approve(router.target, tokenAmount);
+
   const tx = await router.addLiquidityETH(
     token.target,
     tokenAmount,
