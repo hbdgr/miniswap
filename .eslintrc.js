@@ -17,7 +17,6 @@ module.exports = {
     "@typescript-eslint",
   ],
   rules: {
-    // Add any custom rules or override the existing ones here
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
     "comma-dangle": ["error", "always-multiline"],

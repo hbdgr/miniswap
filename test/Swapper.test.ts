@@ -21,7 +21,7 @@ describe("ERC20Deposit", function () {
   async function deployFixture(): Promise<any> {
     const [owner, acc1] = await ethers.getSigners();
 
-    // deploy and transfer 10000 test erc20 tokens to acc1
+    // deploy and transfer test erc20 tokens to acc1
     const testERC20Supply = parseUnits("1000000", 18);
     const TestERC20 = await deployTestERC20("TestToken", "TT", testERC20Supply, 18);
     await TestERC20.transfer(acc1.address, parseUnits("10000", 18));
